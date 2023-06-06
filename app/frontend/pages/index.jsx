@@ -58,7 +58,7 @@ export default function HomePage() {
                   </p>
                   <p>{t("HomePage.startPopulatingYourApp")}</p>
                   <p>
-                    <Trans
+                    <Trans   
                       i18nKey="HomePage.learnMore"
                       components={{
                         ShopifyTutorialLink: (

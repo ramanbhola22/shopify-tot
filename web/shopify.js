@@ -3,6 +3,11 @@ import { shopifyApp } from "@shopify/shopify-app-express";
 import { SQLiteSessionStorage } from "@shopify/shopify-app-session-storage-sqlite";
 import { restResources } from "@shopify/shopify-api/rest/admin/2023-04";
 
+import * as dotenv from 'dotenv'
+dotenv.config({ path: './../.env' });
+
+console.log(process.env);
+
 const DB_PATH = `${process.cwd()}/database.sqlite`;
 
 // The transactions with Shopify will always be marked as test transactions, unless NODE_ENV is production.

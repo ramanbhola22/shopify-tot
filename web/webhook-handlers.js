@@ -83,4 +83,18 @@ export default {
       // }
     },
   },
+   
+  CARTS_UPDATE: {
+    deliveryMethod: DeliveryMethod.Http,
+    callbackUrl: "/api/webhooks",
+    callback: async (topic, shop, body, webhookId) => {
+      const payload = JSON.parse(body);
+      console.log("topic", topic);
+      console.log("shop", shop);
+      console.log("webhookId", webhookId);
+      console.log("payload", payload);
+    },
+  },
+
+
 };

@@ -8,15 +8,44 @@ import {
   Link,
   Text,
 } from "@shopify/polaris";
-import { TitleBar } from "@shopify/app-bridge-react";
+import { TitleBar, useAppBridge } from "@shopify/app-bridge-react";
 import { useTranslation, Trans } from "react-i18next";
+import { Cart, Features } from "@shopify/app-bridge/actions";
+import { useAppQuery } from "../hooks";
 
 import { trophyImage } from "../assets";
 
-import { ProductsCard } from "../components";
 
 export default function HomePage() {
+
   const { t } = useTranslation();
+  const app = useAppBridge();
+
+  console.log("appbridge", app);
+
+  console.log("add to cart");
+
+  app.featuresAvailable().then(function (state) {
+    console.log(state);
+  });
+
+  var cart = Cart.create(app);
+  var unsubscriber = cart.subscribe(Features.Action.UPDATE, function (payload) {
+    console.log('[Client] addLineItem', payload);
+    // unsubscriber();
+  });
+
+  const {
+    
+  } = useAppQuery({
+    url: "/api/products/count",
+    reactQueryOptions: {
+      onSuccess: () => {
+        setIsLoading(false);
+      },
+    },
+  });
+
   return (
     <Page narrowWidth>
       <TitleBar title={t("HomePage.title")} primaryAction={null} />
@@ -34,58 +63,11 @@ export default function HomePage() {
                   <Text as="h2" variant="headingMd">
                     {t("HomePage.heading")}
                   </Text>
-                  <p>
-                    <Trans
-                      i18nKey="HomePage.yourAppIsReadyToExplore"
-                      components={{
-                        PolarisLink: (
-                          <Link url="https://polaris.shopify.com/" external />
-                        ),
-                        AdminApiLink: (
-                          <Link
-                            url="https://shopify.dev/api/admin-graphql"
-                            external
-                          />
-                        ),
-                        AppBridgeLink: (
-                          <Link
-                            url="https://shopify.dev/apps/tools/app-bridge"
-                            external
-                          />
-                        ),
-                      }}
-                    />
-                  </p>
-                  <p>{t("HomePage.startPopulatingYourApp")}</p>
-                  <p>
-                    <Trans
-                      i18nKey="HomePage.learnMore"
-                      components={{
-                        ShopifyTutorialLink: (
-                          <Link
-                            url="https://shopify.dev/apps/getting-started/add-functionality"
-                            external
-                          />
-                        ),
-                      }}
-                    />
-                  </p>
+                  <p>{t("HomePage.subHeading")}</p>
                 </TextContainer>
-              </Stack.Item>
-              <Stack.Item>
-                <div style={{ padding: "0 20px" }}>
-                  <Image
-                    source={trophyImage}
-                    alt={t("HomePage.trophyAltText")}
-                    width={120}
-                  />
-                </div>
               </Stack.Item>
             </Stack>
           </Card>
-        </Layout.Section>
-        <Layout.Section>
-          <ProductsCard />
         </Layout.Section>
       </Layout>
     </Page>

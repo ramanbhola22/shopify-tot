@@ -10,38 +10,18 @@ import {
 } from "@shopify/polaris";
 import { TitleBar, useAppBridge } from "@shopify/app-bridge-react";
 import { useTranslation, Trans } from "react-i18next";
-import { Cart, Features } from "@shopify/app-bridge/actions";
 import { useAppQuery } from "../hooks";
-
-import { trophyImage } from "../assets";
-
-
 export default function HomePage() {
 
   const { t } = useTranslation();
-  const app = useAppBridge();
-
-  console.log("appbridge", app);
-
-  console.log("add to cart");
-
-  app.featuresAvailable().then(function (state) {
-    console.log(state);
-  });
-
-  var cart = Cart.create(app);
-  var unsubscriber = cart.subscribe(Features.Action.UPDATE, function (payload) {
-    console.log('[Client] addLineItem', payload);
-    // unsubscriber();
-  });
 
   const {
     
   } = useAppQuery({
-    url: "/api/products/count",
+    url: "/api/sync/all",
     reactQueryOptions: {
       onSuccess: () => {
-        setIsLoading(false);
+        
       },
     },
   });

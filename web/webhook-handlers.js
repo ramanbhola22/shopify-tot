@@ -1,4 +1,5 @@
 import { DeliveryMethod } from "@shopify/shopify-api";
+import { getSesionByShop, updateOrderTags } from "./utils/shopify.js";
 
 /**
  * @type {{[key: string]: import("@shopify/shopify-api").WebhookHandler}}
@@ -83,16 +84,23 @@ export default {
       // }
     },
   },
-   
-  CARTS_UPDATE: {
+
+  ORDERS_CREATE: {
     deliveryMethod: DeliveryMethod.Http,
     callbackUrl: "/api/webhooks",
     callback: async (topic, shop, body, webhookId) => {
-      const payload = JSON.parse(body);
-      console.log("topic", topic);
-      console.log("shop", shop);
-      console.log("webhookId", webhookId);
-      console.log("payload", payload);
+      const order = JSON.parse(body);
+      let orderTags = order.tags;
+      if (orderTags !== '') {
+        orderTags = orderTags.split(", ");
+      } else {
+        orderTags = [];
+      }
+      if (!orderTags.includes("tax_collected")) {
+        orderTags.push("tax_collected");
+      }
+      let session = await getSesionByShop(shop);
+      await updateOrderTags(session, order.id, orderTags);
     },
   },
 

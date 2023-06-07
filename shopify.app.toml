@@ -1,4 +1,4 @@
 # This file stores configurations for your Shopify app.
 
 name = "Tot"
-scopes = "read_orders,write_orders,read_checkouts,write_checkouts,read_products,write_products,write_script_tags"
+scopes = "read_orders,write_orders,read_products,write_products,write_script_tags"

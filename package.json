@@ -1,5 +1,5 @@
 {
-  "name": "tot",
+  "name": "tot-phase3",
   "version": "1.0.0",
   "main": "web/index.js",
   "license": "UNLICENSED",
@@ -14,7 +14,8 @@
   "dependencies": {
     "@shopify/app": "3.46.2",
     "@shopify/cli": "3.46.2",
-    "@shopify/shopify-app-session-storage-mongodb": "^1.0.8"
+    "@shopify/shopify-app-session-storage-mongodb": "^1.0.8",
+    "react": "^17.0.2"
   },
   "author": "apple",
   "private": true,

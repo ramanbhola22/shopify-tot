@@ -3,4 +3,4 @@ npm install
 
 cd frontend
 npm install
-export SHOPIFY_API_KEY=3f731947689e7036a17186bff1bea0ab && npm run build
+export SHOPIFY_API_KEY=20ff58f7e4b5dc27b3f4e150bb6d0816 && npm run build

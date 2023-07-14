@@ -1,8 +1,8 @@
 {
   "HomePage": {
-    "title": "ToT Shopify App",
-    "heading": "Welcome to ToT Shopify App 🎉",
-    "subHeading": "This app will add $1 price item per product added in cart"
+    "title": "ToT Phase 3 Shopify App",
+    "heading": "Welcome to ToT Phase 3 Shopify App 🎉",
+    "subHeading": "This app will add $1 price item per product added in cart during checkout"
   },
   "NavigationMenu": {
     "pageName": "Page name"

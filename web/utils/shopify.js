@@ -35,14 +35,14 @@ export const syncToTProduct = async (session) => {
             console.log("ToT Product added");
         } else {
             console.log("ToT Product already exist");
-        }
-    } catch (error) {
+        }  
+    } catch (error) {      
         console.log(error);
     }
 }
 
 export const syncScript = async (session) => {
-    try {
+    try {      
         let haveScript = false;
         let scriptUrl = process.env.APP_URL + "/assets/tot-cart.js";
 
@@ -62,6 +62,8 @@ export const syncScript = async (session) => {
                 }
             }
         }
+
+        console.log(scriptUrl);
 
         if (!haveScript) {
             const scriptModel = new shopify.api.rest.ScriptTag({ session: session });

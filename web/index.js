@@ -45,16 +45,16 @@ app.get("/api/sync/all", async (_req, res) => {
   await syncToTProduct(res.locals.shopify.session);
   await syncWebhook(res.locals.shopify.session);
   res.status(200).send({ status: true });
-});
+});  
 
 app.use(shopify.cspHeaders());
-app.use(serveStatic(STATIC_PATH, { index: false }));
+app.use(serveStatic(STATIC_PATH, { index: false }));   
 
 app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res, _next) => {
   return res
-    .status(200)
+    .status(200)     
     .set("Content-Type", "text/html")
-    .send(readFileSync(join(STATIC_PATH, "index.html")));
+    .send(readFileSync(join(STATIC_PATH, "index.html")));   
 });
 
 app.listen(PORT);
